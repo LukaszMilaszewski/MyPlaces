@@ -1,13 +1,14 @@
-import UIKit
+import RealmSwift
 
-class Place {
-  var photo: UIImage!
-  var description: String
-  var address: String
-  
-  init(photo: UIImage, description: String, address: String) {
+class Place: Object {
+  @objc dynamic var photo = ""
+  @objc dynamic var descript = ""
+  @objc dynamic var address = ""
+
+  convenience init(photo: String, descript: String, address: String) {
+    self.init()
     self.photo = photo
-    self.description = description
+    self.descript = descript
     self.address = address
   }
 }

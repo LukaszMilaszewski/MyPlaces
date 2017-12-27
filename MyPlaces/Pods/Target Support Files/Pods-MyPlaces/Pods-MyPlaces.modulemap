@@ -1,0 +1,6 @@
+framework module Pods_MyPlaces {
+  umbrella header "Pods-MyPlaces-umbrella.h"
+
+  export *
+  module * { export * }
+}

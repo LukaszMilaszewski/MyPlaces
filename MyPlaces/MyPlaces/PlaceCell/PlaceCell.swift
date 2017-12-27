@@ -15,7 +15,7 @@ class PlaceCell: UITableViewCell {
   }
   
   func initPlaceCell(place: Place) {
-    photoView.image = place.photo
+    photoView.image = UIImage(named: place.photo)
     descriptionLabel.text = place.description
     addressLabel.text = place.address
   }

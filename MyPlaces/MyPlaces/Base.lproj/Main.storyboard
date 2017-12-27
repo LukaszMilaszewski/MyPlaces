@@ -51,7 +51,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="bd9-5f-6Af">
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="07s-Fm-iFb"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LuT-d9-yVE"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LuT-d9-yVE">
+                            <connections>
+                                <action selector="addPlace" destination="81Y-n1-SU0" id="yHh-Ji-Rkx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfx-Wo-bky" userLabel="First Responder" sceneMemberID="firstResponder"/>
