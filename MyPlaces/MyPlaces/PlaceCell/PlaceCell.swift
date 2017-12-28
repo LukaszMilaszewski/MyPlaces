@@ -8,6 +8,8 @@ class PlaceCell: UITableViewCell {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+    photoView.layer.cornerRadius = photoView.bounds.size.width / 2
+    photoView.clipsToBounds = true
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -15,8 +17,16 @@ class PlaceCell: UITableViewCell {
   }
   
   func initPlaceCell(place: Place) {
-    photoView.image = UIImage(named: place.photo)
+    photoView.image = thumbnail(for: place)
     descriptionLabel.text = place.description
     addressLabel.text = place.address
+  }
+  
+  func thumbnail(for place: Place) -> UIImage {
+    if place.hasPhoto, let imageData = place.photo {
+      let image = UIImage(data: imageData, scale: 1.0)
+      return image!
+    }
+    return UIImage(named: "noimage.png")!
   }
 }

@@ -52,7 +52,6 @@
                     <navigationItem key="navigationItem" title="My Places" id="bd9-5f-6Af">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LuT-d9-yVE">
                             <connections>
-                                <action selector="addPlace" destination="81Y-n1-SU0" id="yHh-Ji-Rkx"/>
                                 <segue destination="glR-6l-bb7" kind="presentation" identifier="AddPlace" id="hZg-Kz-YgK"/>
                             </connections>
                         </barButtonItem>
@@ -87,6 +86,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUv-CT-6wp">
+                                <rect key="frame" x="16" y="371" width="343" height="276"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vD4-CZ-aR8">
+                                <rect key="frame" x="143" y="333" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Photo"/>
+                                <connections>
+                                    <action selector="addPhoto" destination="abT-6A-Gqj" eventType="touchUpInside" id="HuH-5W-Kg1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="G7u-NZ-HVT"/>
@@ -105,11 +116,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="lje-gS-TA0" id="SMj-R7-Ype"/>
+                        <outlet property="imageView" destination="JUv-CT-6wp" id="ppk-AK-eFh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vp-OM-c0B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3588" y="-375"/>
+            <point key="canvasLocation" x="3588" y="-375.56221889055473"/>
         </scene>
         <!--Places-->
         <scene sceneID="ebe-Ct-43S">

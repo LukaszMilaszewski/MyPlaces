@@ -15,15 +15,6 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     tableView.register(nibCellName, forCellReuseIdentifier: "PlaceCell")
   }
   
-  @IBAction func addPlace() {
-    let place = Place(photo: "noimage.png", descript: "blabla", address: "slupsk")
-    
-    try! self.realm.write({
-      self.realm.add(place)
-      self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
-    })
-  }
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "AddPlace" {
       let navigationController = segue.destination as! UINavigationController
@@ -68,9 +59,7 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if (editingStyle == .delete){
       let place = places[indexPath.row]
-      try! self.realm.write({
-        self.realm.delete(place)
-      })
+      place.delete(realm: realm)
       tableView.deleteRows(at:[indexPath], with: .automatic)
     }
   }
@@ -90,19 +79,15 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
   
   func placeDetailViewController(_ controller: PlaceDetailViewController,
                                 didFinishAdding place: Place) {
-    try! self.realm.write({
-      self.realm.add(place)
-      self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
-    })
-    
+
+    place.save(realm: realm)
+    self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
     dismiss(animated: true, completion: nil)
   }
   
   func placeDetailViewController(_ controller: PlaceDetailViewController,
                                  didFinishEditing place: Place, editedPlace: Place) {
-    try! self.realm.write({
-      place.descript = editedPlace.descript
-    })
+    place.update(editedPlace: editedPlace, realm: realm)
     tableView.reloadData()
     dismiss(animated: true, completion: nil)
   }
