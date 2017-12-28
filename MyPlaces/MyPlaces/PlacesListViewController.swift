@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class PlacesListViewController: UITableViewController {
+class PlacesListViewController: UITableViewController, PlaceDetailViewControllerDelegate {
 
   var realm : Realm!
   var places: Results<Place> { get { return realm.objects(Place.self) }}
@@ -22,6 +22,22 @@ class PlacesListViewController: UITableViewController {
       self.realm.add(place)
       self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
     })
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "AddPlace" {
+      let navigationController = segue.destination as! UINavigationController
+      let controller = navigationController.topViewController as! PlaceDetailViewController
+      controller.delegate = self
+    } else if segue.identifier == "EditPlace" {
+      let navigationController = segue.destination as! UINavigationController
+      let controller = navigationController.topViewController as! PlaceDetailViewController
+      controller.delegate = self
+      
+      if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+        controller.placeToEdit = places[indexPath.row]
+      }
+    }
   }
   
   // MARK: - TableView
@@ -57,5 +73,37 @@ class PlacesListViewController: UITableViewController {
       })
       tableView.deleteRows(at:[indexPath], with: .automatic)
     }
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let cell = tableView.cellForRow(at: indexPath) {
+      performSegue(withIdentifier: "EditPlace", sender: cell)
+    }
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  // MARK: - PlaceDetailViewControllerDelegate
+  
+  func placeDetailViewControllerDidCancel(_ controller: PlaceDetailViewController) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func placeDetailViewController(_ controller: PlaceDetailViewController,
+                                didFinishAdding place: Place) {
+    try! self.realm.write({
+      self.realm.add(place)
+      self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
+    })
+    
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func placeDetailViewController(_ controller: PlaceDetailViewController,
+                                 didFinishEditing place: Place, editedPlace: Place) {
+    try! self.realm.write({
+      place.descript = editedPlace.descript
+    })
+    tableView.reloadData()
+    dismiss(animated: true, completion: nil)
   }
 }

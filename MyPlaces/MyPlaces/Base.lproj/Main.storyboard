@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="854" y="353"/>
         </scene>
-        <!--Title-->
+        <!--My Places-->
         <scene sceneID="qp2-uO-dn4">
             <objects>
                 <tableViewController id="81Y-n1-SU0" customClass="PlacesListViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="temp" rowHeight="33" id="Ixo-Od-lcC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="placeCell" rowHeight="33" id="Ixo-Od-lcC">
                                 <rect key="frame" x="0.0" y="28" width="375" height="33"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ixo-Od-lcC" id="Skj-Lo-Dld">
@@ -49,18 +49,67 @@
                             <outlet property="delegate" destination="81Y-n1-SU0" id="iGz-Ob-4Tc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="bd9-5f-6Af">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="07s-Fm-iFb"/>
+                    <navigationItem key="navigationItem" title="My Places" id="bd9-5f-6Af">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LuT-d9-yVE">
                             <connections>
                                 <action selector="addPlace" destination="81Y-n1-SU0" id="yHh-Ji-Rkx"/>
+                                <segue destination="glR-6l-bb7" kind="presentation" identifier="AddPlace" id="hZg-Kz-YgK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="glR-6l-bb7" kind="presentation" identifier="EditPlace" id="cdn-FG-0Cq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfx-Wo-bky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="-372.86356821589209"/>
+        </scene>
+        <!--Add Place-->
+        <scene sceneID="Wcy-uj-hYU">
+            <objects>
+                <viewController id="abT-6A-Gqj" customClass="PlaceDetailViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zsn-Kq-T5i" customClass="PlaceDeta">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-nu-xAU">
+                                <rect key="frame" x="16" y="92" width="124" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lje-gS-TA0">
+                                <rect key="frame" x="16" y="151" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="G7u-NZ-HVT"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Place" id="u2L-wH-fTL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r96-uq-VdG">
+                            <connections>
+                                <action selector="cancel" destination="abT-6A-Gqj" id="r7v-UM-a8T"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4GH-6y-hIt">
+                            <connections>
+                                <action selector="done" destination="abT-6A-Gqj" id="0D8-Wc-DJh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="lje-gS-TA0" id="SMj-R7-Ype"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4vp-OM-c0B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3588" y="-375"/>
         </scene>
         <!--Places-->
         <scene sceneID="ebe-Ct-43S">
@@ -97,5 +146,26 @@
             </objects>
             <point key="canvasLocation" x="-98" y="-54"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sl9-Rd-DTf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="glR-6l-bb7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5S3-2U-ecl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="abT-6A-Gqj" kind="relationship" relationship="rootViewController" id="ghD-Hn-jrH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8JR-B6-eAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2812.8000000000002" y="-374.21289355322341"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cdn-FG-0Cq"/>
+    </inferredMetricsTieBreakers>
 </document>

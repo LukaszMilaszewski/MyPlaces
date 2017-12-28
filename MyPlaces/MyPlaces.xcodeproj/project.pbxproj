@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7C6E127AB111285019D34649 /* Pods_MyPlacesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97F47B617FA9FCC5EEFE8B3 /* Pods_MyPlacesUITests.framework */; };
+		8E27AD431FF46973002D61AB /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27AD421FF46973002D61AB /* PlaceDetailViewController.swift */; };
 		8E7FDE371FF3F24D004880F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE361FF3F24D004880F8 /* AppDelegate.swift */; };
 		8E7FDE391FF3F24D004880F8 /* PlacesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE381FF3F24D004880F8 /* PlacesListViewController.swift */; };
 		8E7FDE3C1FF3F24D004880F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE3A1FF3F24D004880F8 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		3DA5FDC52D202D07D69920F7 /* Pods-MyPlacesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyPlacesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyPlacesTests/Pods-MyPlacesTests.release.xcconfig"; sourceTree = "<group>"; };
 		51C4E7B58D25B549A59BEC2B /* Pods-MyPlacesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyPlacesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyPlacesTests/Pods-MyPlacesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7D979CBEC52C42A678968154 /* Pods-MyPlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyPlaces.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyPlaces/Pods-MyPlaces.release.xcconfig"; sourceTree = "<group>"; };
+		8E27AD421FF46973002D61AB /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		8E7FDE331FF3F24D004880F8 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7FDE361FF3F24D004880F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E7FDE381FF3F24D004880F8 /* PlacesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				8E7FDE451FF3F24D004880F8 /* Info.plist */,
 				8E7FDE3D1FF3F24D004880F8 /* MyPlaces.xcdatamodeld */,
 				8E7FDE6B1FF40209004880F8 /* Place.swift */,
+				8E27AD421FF46973002D61AB /* PlaceDetailViewController.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				8E7FDE391FF3F24D004880F8 /* PlacesListViewController.swift in Sources */,
 				8E7FDE3F1FF3F24D004880F8 /* MyPlaces.xcdatamodeld in Sources */,
 				8E7FDE371FF3F24D004880F8 /* AppDelegate.swift in Sources */,
+				8E27AD431FF46973002D61AB /* PlaceDetailViewController.swift in Sources */,
 				8E7FDE691FF3FDCA004880F8 /* PlaceCell.swift in Sources */,
 				8E7FDE6C1FF40209004880F8 /* Place.swift in Sources */,
 			);
