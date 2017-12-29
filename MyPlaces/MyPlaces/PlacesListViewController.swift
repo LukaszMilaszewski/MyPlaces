@@ -1,15 +1,34 @@
 import UIKit
 import RealmSwift
+import Dropdowns
 
 class PlacesListViewController: UITableViewController, PlaceDetailViewControllerDelegate {
 
   var realm : Realm!
-  var places: Results<Place> { get { return realm.objects(Place.self) }}
+  var places: Results<Place>!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     realm = try! Realm()
+    places = realm.objects(Place.self)
+    let items = ["By description", "By date", "By address"]
+    let titleView = TitleView(navigationController: navigationController!, title: "My places", items: items)
+    titleView?.action = { [weak self] index in
+      switch index {
+      case 0:
+        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "descript")
+        self?.tableView.reloadData()
+      case 1:
+        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "date")
+        self?.tableView.reloadData()
+      case 2:
+        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "address")
+        self?.tableView.reloadData()
+      default:
+        print("blabla")
+      }
+    }
+    navigationItem.titleView = titleView
     
     let nibCellName = UINib(nibName: "PlaceCell", bundle: nil)
     tableView.register(nibCellName, forCellReuseIdentifier: "PlaceCell")
