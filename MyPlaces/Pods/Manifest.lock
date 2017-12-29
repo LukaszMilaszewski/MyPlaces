@@ -1,5 +1,10 @@
 PODS:
   - Dropdowns (2.0.0)
+  - GoogleMaps (2.5.0):
+    - GoogleMaps/Maps (= 2.5.0)
+  - GoogleMaps/Base (2.5.0)
+  - GoogleMaps/Maps (2.5.0):
+    - GoogleMaps/Base
   - Realm (3.0.2):
     - Realm/Headers (= 3.0.2)
   - Realm/Headers (3.0.2)
@@ -8,13 +13,15 @@ PODS:
 
 DEPENDENCIES:
   - Dropdowns
+  - GoogleMaps
   - RealmSwift
 
 SPEC CHECKSUMS:
   Dropdowns: 9dd32d9ac9cc59e56ae093b588d35477abde32d2
+  GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
   RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
 
-PODFILE CHECKSUM: a8658dc6ce16abbba9826c681440aab983381d14
+PODFILE CHECKSUM: 6817679ea11d9bc357738f06ad00fe6544bf3cf4
 
 COCOAPODS: 1.4.0.rc.1

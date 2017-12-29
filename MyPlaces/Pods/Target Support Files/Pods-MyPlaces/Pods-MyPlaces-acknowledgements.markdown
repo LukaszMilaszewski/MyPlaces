@@ -27,6 +27,10 @@ Licensed under the **MIT** license
 > SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+## GoogleMaps
+
+Copyright 2017 Google
+
 ## Realm
 
 TABLE OF CONTENTS

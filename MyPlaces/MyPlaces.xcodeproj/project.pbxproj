@@ -21,6 +21,7 @@
 		8E7FDE6A1FF3FDCA004880F8 /* PlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */; };
 		8E7FDE6C1FF40209004880F8 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE6B1FF40209004880F8 /* Place.swift */; };
 		8E7FDE711FF41295004880F8 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE701FF41295004880F8 /* noimage.png */; };
+		8E85E0E81FF6D09C0025A3B1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */; };
 		C91F10DE994E825B1F82A5C0 /* Pods_MyPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D72E4194D1089FA11FB8E3 /* Pods_MyPlaces.framework */; };
 		CE8BF2B5DFB2AC556E61F261 /* Pods_MyPlacesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E8148D3EBC8CEA0666889B /* Pods_MyPlacesTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceCell.xib; sourceTree = "<group>"; };
 		8E7FDE6B1FF40209004880F8 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		8E7FDE701FF41295004880F8 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		93E8148D3EBC8CEA0666889B /* Pods_MyPlacesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyPlacesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97F47B617FA9FCC5EEFE8B3 /* Pods_MyPlacesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyPlacesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6308C2C123C244DDB119264 /* Pods-MyPlacesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyPlacesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyPlacesUITests/Pods-MyPlacesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				8E7FDE3D1FF3F24D004880F8 /* MyPlaces.xcdatamodeld */,
 				8E7FDE6B1FF40209004880F8 /* Place.swift */,
 				8E27AD421FF46973002D61AB /* PlaceDetailViewController.swift */,
+				8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -461,9 +464,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyPlaces/Pods-MyPlaces-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,6 +502,7 @@
 				8E7FDE3F1FF3F24D004880F8 /* MyPlaces.xcdatamodeld in Sources */,
 				8E7FDE371FF3F24D004880F8 /* AppDelegate.swift in Sources */,
 				8E27AD431FF46973002D61AB /* PlaceDetailViewController.swift in Sources */,
+				8E85E0E81FF6D09C0025A3B1 /* MapViewController.swift in Sources */,
 				8E7FDE691FF3FDCA004880F8 /* PlaceCell.swift in Sources */,
 				8E7FDE6C1FF40209004880F8 /* Place.swift in Sources */,
 			);

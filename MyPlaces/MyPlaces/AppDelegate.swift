@@ -1,13 +1,6 @@
-//
-//  AppDelegate.swift
-//  MyPlaces
-//
-//  Created by Łukasz Miłaszewski on 27/12/2017.
-//  Copyright © 2017 Łukasz Miłaszewski. All rights reserved.
-//
-
 import UIKit
 import RealmSwift
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    GMSServices.provideAPIKey("AIzaSyDZzo3tS_56Ec1ZNoYpWlFEPx7lfMfJxiA")
+    
     return true
   }
   
