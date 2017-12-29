@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import CoreLocation
 
 protocol PlaceDetailViewControllerDelegate: class {
   func placeDetailViewControllerDidCancel(_ controller: PlaceDetailViewController)
@@ -11,24 +12,61 @@ protocol PlaceDetailViewControllerDelegate: class {
                                  didFinishEditing place: Place, editedPlace: Place)
 }
 
-class PlaceDetailViewController: UIViewController {
- 
+class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
+  
   @IBOutlet weak var descriptionTextField: UITextField!
   @IBOutlet weak var imageView: UIImageView!
-  @IBAction func addPhoto() {
-    pickPhoto()
-  }
+  @IBOutlet weak var addressLabel: UILabel!
   
   weak var delegate: PlaceDetailViewControllerDelegate?
   var placeToEdit: Place?
   var image: UIImage?
+  let locationManager = CLLocationManager()
+  lazy var geocoder = CLGeocoder()
+  var longitude = 0.0
+  var latitude = 0.0
+  var address = ""
+  
+  @IBAction func findLocation() {
+    addressLabel.text = "searching for location ... "
+    if CLLocationManager.locationServicesEnabled() {
+      locationManager.delegate = self
+      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      locationManager.requestLocation()
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.first {
+      print(location.coordinate)
+      longitude = location.coordinate.longitude
+      latitude = location.coordinate.latitude
+      
+      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        if let placemarks = placemarks, let placemark = placemarks.first {
+          self.addressLabel.text = placemark.compactAddress
+          self.address = placemark.compactAddress!
+        }
+      }
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager,
+                       didFailWithError error: Error) {}
+  
+  @IBAction func addPhoto() {
+    pickPhoto()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    locationManager.requestAlwaysAuthorization()
+    addressLabel.text = ""
     if let place = placeToEdit {
       title = "Edit Place"
       descriptionTextField.text = place.descript
+      addressLabel.text = place.address
       imageView.image = UIImage(data: place.photo!, scale: 1.0)
     }
   }
@@ -55,6 +93,10 @@ class PlaceDetailViewController: UIViewController {
   
   func setupPlace(place: Place) {
     place.descript = descriptionTextField.text!
+    place.longitude = longitude
+    place.latitude = latitude
+    place.date = NSDate()
+    place.address = address
     if let image = imageView.image {
       place.photo = UIImagePNGRepresentation(image) as Data?
     } else {
@@ -128,5 +170,30 @@ extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigati
 class MyImagePickerController: UIImagePickerController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
+  }
+}
+
+extension CLPlacemark {
+  
+  var compactAddress: String? {
+    if let name = name {
+      var result = name
+      
+      if let street = thoroughfare {
+        result += ", \(street)"
+      }
+      
+      if let city = locality {
+        result += ", \(city)"
+      }
+      
+      if let country = country {
+        result += ", \(country)"
+      }
+      
+      return result
+    }
+    
+    return nil
   }
 }

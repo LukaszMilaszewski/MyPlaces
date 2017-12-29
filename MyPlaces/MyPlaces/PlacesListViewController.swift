@@ -79,7 +79,6 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
   
   func placeDetailViewController(_ controller: PlaceDetailViewController,
                                 didFinishAdding place: Place) {
-
     place.save(realm: realm)
     self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
     dismiss(animated: true, completion: nil)
