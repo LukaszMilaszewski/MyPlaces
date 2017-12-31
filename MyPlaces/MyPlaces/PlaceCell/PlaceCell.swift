@@ -11,10 +11,6 @@ class PlaceCell: UITableViewCell {
     photoView.layer.cornerRadius = photoView.bounds.size.width / 2
     photoView.clipsToBounds = true
   }
-
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-  }
   
   func initPlaceCell(place: Place) {
     photoView.image = thumbnail(for: place)

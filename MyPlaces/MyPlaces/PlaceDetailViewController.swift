@@ -4,12 +4,8 @@ import CoreLocation
 
 protocol PlaceDetailViewControllerDelegate: class {
   func placeDetailViewControllerDidCancel(_ controller: PlaceDetailViewController)
-  
-  func placeDetailViewController(_ controller: PlaceDetailViewController,
-                                didFinishAdding place: Place)
-  
-  func placeDetailViewController(_ controller: PlaceDetailViewController,
-                                 didFinishEditing place: Place, editedPlace: Place)
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishAdding place: Place)
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place)
 }
 
 class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
@@ -100,7 +96,7 @@ class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
     if let image = imageView.image {
       place.photo = UIImagePNGRepresentation(image) as Data?
     } else {
-      place.photo = UIImagePNGRepresentation(UIImage(named: "noimage.png")!) as Data?
+      place.photo = UIImagePNGRepresentation(UIImage(named: "noimage")!) as Data?
     }
   }
 }
@@ -115,20 +111,13 @@ extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigati
   }
   
   func showPhotoMenu() {
-    let alertController = UIAlertController(title: nil, message: nil,
-                                            preferredStyle: .actionSheet)
-    
+    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     alertController.addAction(cancelAction)
-    
     let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default, handler: { _ in self.takePhotoWithCamera() })
-    
     alertController.addAction(takePhotoAction)
-    
     let chooseFromLibraryAction = UIAlertAction(title: "Choose From Library", style: .default, handler: { _ in self.choosePhotoFromLibrary() })
-    
     alertController.addAction(chooseFromLibraryAction)
-    
     present(alertController, animated: true, completion: nil)
   }
   
@@ -150,15 +139,12 @@ extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigati
     present(imagePicker, animated: true, completion: nil)
   }
   
-  func imagePickerController(_ picker: UIImagePickerController,
-                             didFinishPickingMediaWithInfo info: [String : Any]) {
-    
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     image = info[UIImagePickerControllerEditedImage] as? UIImage
     
     if let theImage = image {
       imageView.image = theImage
     }
-
     dismiss(animated: true, completion: nil)
   }
   
@@ -178,22 +164,11 @@ extension CLPlacemark {
   var compactAddress: String? {
     if let name = name {
       var result = name
-      
-      if let street = thoroughfare {
-        result += ", \(street)"
-      }
-      
-      if let city = locality {
-        result += ", \(city)"
-      }
-      
-      if let country = country {
-        result += ", \(country)"
-      }
+      if let city = locality { result += ", \(city)" }
+      if let country = country { result += ", \(country)" }
       
       return result
     }
-    
     return nil
   }
 }

@@ -20,8 +20,9 @@
 		8E7FDE691FF3FDCA004880F8 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE671FF3FDCA004880F8 /* PlaceCell.swift */; };
 		8E7FDE6A1FF3FDCA004880F8 /* PlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */; };
 		8E7FDE6C1FF40209004880F8 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE6B1FF40209004880F8 /* Place.swift */; };
-		8E7FDE711FF41295004880F8 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE701FF41295004880F8 /* noimage.png */; };
 		8E85E0E81FF6D09C0025A3B1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */; };
+		8E85E0EB1FF6D48D0025A3B1 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85E0EA1FF6D48D0025A3B1 /* MarkerView.swift */; };
+		8E85E0ED1FF6D5140025A3B1 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E85E0EC1FF6D5140025A3B1 /* MarkerView.xib */; };
 		C91F10DE994E825B1F82A5C0 /* Pods_MyPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D72E4194D1089FA11FB8E3 /* Pods_MyPlaces.framework */; };
 		CE8BF2B5DFB2AC556E61F261 /* Pods_MyPlacesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E8148D3EBC8CEA0666889B /* Pods_MyPlacesTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,8 +69,9 @@
 		8E7FDE671FF3FDCA004880F8 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceCell.xib; sourceTree = "<group>"; };
 		8E7FDE6B1FF40209004880F8 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		8E7FDE701FF41295004880F8 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
 		8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8E85E0EA1FF6D48D0025A3B1 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
+		8E85E0EC1FF6D5140025A3B1 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		93E8148D3EBC8CEA0666889B /* Pods_MyPlacesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyPlacesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97F47B617FA9FCC5EEFE8B3 /* Pods_MyPlacesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyPlacesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6308C2C123C244DDB119264 /* Pods-MyPlacesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyPlacesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyPlacesUITests/Pods-MyPlacesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +122,6 @@
 				8E7FDE4D1FF3F24D004880F8 /* MyPlacesTests */,
 				8E7FDE581FF3F24D004880F8 /* MyPlacesUITests */,
 				8E7FDE341FF3F24D004880F8 /* Products */,
-				8E7FDE701FF41295004880F8 /* noimage.png */,
 				B36194C7CB0368DD3FD0E22E /* Pods */,
 				3CC7CC6779E78707E9918085 /* Frameworks */,
 			);
@@ -141,6 +142,7 @@
 		8E7FDE351FF3F24D004880F8 /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				8E85E0E91FF6D4350025A3B1 /* MarkerView */,
 				8E7FDE6D1FF40907004880F8 /* PlaceCell */,
 				8E7FDE361FF3F24D004880F8 /* AppDelegate.swift */,
 				8E7FDE381FF3F24D004880F8 /* PlacesListViewController.swift */,
@@ -181,6 +183,15 @@
 				8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */,
 			);
 			path = PlaceCell;
+			sourceTree = "<group>";
+		};
+		8E85E0E91FF6D4350025A3B1 /* MarkerView */ = {
+			isa = PBXGroup;
+			children = (
+				8E85E0EA1FF6D48D0025A3B1 /* MarkerView.swift */,
+				8E85E0EC1FF6D5140025A3B1 /* MarkerView.xib */,
+			);
+			path = MarkerView;
 			sourceTree = "<group>";
 		};
 		B36194C7CB0368DD3FD0E22E /* Pods */ = {
@@ -312,7 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7FDE711FF41295004880F8 /* noimage.png in Resources */,
+				8E85E0ED1FF6D5140025A3B1 /* MarkerView.xib in Resources */,
 				8E7FDE441FF3F24D004880F8 /* LaunchScreen.storyboard in Resources */,
 				8E7FDE411FF3F24D004880F8 /* Assets.xcassets in Resources */,
 				8E7FDE3C1FF3F24D004880F8 /* Main.storyboard in Resources */,
@@ -498,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E85E0EB1FF6D48D0025A3B1 /* MarkerView.swift in Sources */,
 				8E7FDE391FF3F24D004880F8 /* PlacesListViewController.swift in Sources */,
 				8E7FDE3F1FF3F24D004880F8 /* MyPlaces.xcdatamodeld in Sources */,
 				8E7FDE371FF3F24D004880F8 /* AppDelegate.swift in Sources */,

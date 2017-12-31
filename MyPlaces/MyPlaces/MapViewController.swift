@@ -1,22 +1,43 @@
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 class MapViewController: UIViewController {
   
-  // You don't need to modify the default init(nibName:bundle:) method.
+  var realm : Realm!
+  var places: Results<Place>!
+  @IBOutlet fileprivate weak var mapView: GMSMapView!
   
-  override func loadView() {
-    // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-    let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-    view = mapView
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
-    // Creates a marker in the center of the map.
-    let marker = GMSMarker()
-    marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-    marker.title = "Sydney"
-    marker.snippet = "Australia"
-    marker.map = mapView
+    mapView.clear()
+    realm = try! Realm()
+    places = realm.objects(Place.self)
+    if places.count > 0 {
+      let initLatitude = places[places.count - 1].latitude
+      let initLongitude = places[places.count - 1].longitude
+      
+      let camera = GMSCameraPosition.camera(withLatitude: initLatitude, longitude: initLongitude, zoom: 6.0)
+      mapView.camera = camera
+      
+      for place in places {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        marker.userData = place
+        marker.map = mapView
+      }
+    }
+  }
+}
+
+extension MapViewController: GMSMapViewDelegate{
+  
+  func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+    let markerView = MarkerView.loadNiB()
+    let place = marker.userData as! Place
+    markerView.initMarkerView(place: place)
+    
+    return markerView
   }
 }

@@ -10,21 +10,34 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Delegate-->
         <scene sceneID="huL-im-7N9">
             <objects>
                 <viewController id="sNc-Ir-JCP" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SKS-gi-P9z" customClass="MapV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iQ9-RO-XhC" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="delegate" destination="sNc-Ir-JCP" id="T3A-0K-ie1"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1zA-PT-9P3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="5sc-3O-XXG"/>
+                    <connections>
+                        <outlet property="mapView" destination="iQ9-RO-XhC" id="kHr-8j-azx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vtr-tY-1Nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="353"/>
+            <point key="canvasLocation" x="853.60000000000002" y="352.17391304347831"/>
         </scene>
         <!--My Places-->
         <scene sceneID="qp2-uO-dn4">
