@@ -16,9 +16,10 @@ class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
   
   weak var delegate: PlaceDetailViewControllerDelegate?
   var placeToEdit: Place?
-  var image: UIImage?
+
   let locationManager = CLLocationManager()
   lazy var geocoder = CLGeocoder()
+
   var longitude = 0.0
   var latitude = 0.0
   var address = ""
@@ -140,7 +141,7 @@ extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigati
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    image = info[UIImagePickerControllerEditedImage] as? UIImage
+    let image = info[UIImagePickerControllerEditedImage] as? UIImage
     
     if let theImage = image {
       imageView.image = theImage

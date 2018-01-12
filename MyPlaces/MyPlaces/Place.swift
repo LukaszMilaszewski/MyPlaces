@@ -23,6 +23,7 @@ class Place: Object {
   func update(editedPlace: Place, realm: Realm) {
     try! realm.write({
       descript = editedPlace.descript
+      address = editedPlace.address
       photo = editedPlace.photo
     })
   }

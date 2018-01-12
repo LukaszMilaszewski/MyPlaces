@@ -12,21 +12,12 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     realm = try! Realm()
     places = realm.objects(Place.self)
     let items = ["By description", "By date", "By address"]
+
     let titleView = TitleView(navigationController: navigationController!, title: "My places", items: items)
     titleView?.action = { [weak self] index in
-      switch index {
-      case 0:
-        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "descript")
-        self?.tableView.reloadData()
-      case 1:
-        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "date")
-        self?.tableView.reloadData()
-      case 2:
-        self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: "address")
-        self?.tableView.reloadData()
-      default:
-        print("blabla")
-      }
+      let keys = ["descript", "date", "address"]
+      self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: keys[index])
+      self?.tableView.reloadData()
     }
     navigationItem.titleView = titleView
     
@@ -96,8 +87,7 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     dismiss(animated: true, completion: nil)
   }
   
-  func placeDetailViewController(_ controller: PlaceDetailViewController,
-                                didFinishAdding place: Place) {
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishAdding place: Place) {
     place.save(realm: realm)
     self.tableView.insertRows(at: [IndexPath.init(row: self.places.count-1, section: 0)], with: .automatic)
     dismiss(animated: true, completion: nil)
