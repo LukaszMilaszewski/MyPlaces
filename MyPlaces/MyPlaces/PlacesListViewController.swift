@@ -4,15 +4,24 @@ import Dropdowns
 
 class PlacesListViewController: UITableViewController, PlaceDetailViewControllerDelegate {
 
-  var realm : Realm!
+  var realm = try! Realm()
   var places: Results<Place>!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    realm = try! Realm()
     places = realm.objects(Place.self)
+    setDropdownmenu()
+    loadPlaceCell()
+  }
+  
+  func loadPlaceCell() {
+    let nibCellName = UINib(nibName: "PlaceCell", bundle: nil)
+    tableView.register(nibCellName, forCellReuseIdentifier: "PlaceCell")
+  }
+  
+  func setDropdownmenu() {
     let items = ["By date", "By description", "By address"]
-
+    
     let titleView = TitleView(navigationController: navigationController!, title: "My places", items: items)
     titleView?.action = { [weak self] index in
       let keys = ["date", "descript", "address"]
@@ -20,10 +29,9 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
       self?.tableView.reloadData()
     }
     navigationItem.titleView = titleView
-    
-    let nibCellName = UINib(nibName: "PlaceCell", bundle: nil)
-    tableView.register(nibCellName, forCellReuseIdentifier: "PlaceCell")
   }
+  
+  // MARK: - segue
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "AddPlace" {

@@ -28,24 +28,6 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
   var address = ""
   var date = NSDate()
   
-  func textViewDidChange(_ textView: UITextView) {
-    if textView.text.isEmpty {
-      doneButton.isEnabled = false
-    } else {
-      doneButton.isEnabled = true
-    }
-  }
-  
-  func findLocation() {
-    addressLabel.text = "searching for location ... "
-    locationManager.requestAlwaysAuthorization()
-    if CLLocationManager.locationServicesEnabled() {
-      locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-      locationManager.requestLocation()
-    }
-  }
-  
   func show(image: UIImage) {
     imageView.image = image
     imageView.isHidden = false
@@ -53,28 +35,6 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     photoLabel.isHidden = true
   }
   
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    if let location = locations.first {
-      print(location.coordinate)
-      longitude = location.coordinate.longitude
-      latitude = location.coordinate.latitude
-      
-      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-        if let placemarks = placemarks, let placemark = placemarks.first {
-          self.addressLabel.text = placemark.compactAddress
-          self.address = placemark.compactAddress!
-        }
-      }
-    }
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
-  
-  func getDate(date: NSDate) -> String {
-    let dateformatter = DateFormatter()
-    dateformatter.dateStyle = DateFormatter.Style.medium
-    return dateformatter.string(from: date as Date)
-  }
   func configureView() {
     if let place = placeToEdit {
       title = "Edit Place"
@@ -96,21 +56,7 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     super.viewDidLoad()
     findLocation()
     configureView()
-    
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-    gestureRecognizer.cancelsTouchesInView = false
-    tableView.addGestureRecognizer(gestureRecognizer)
-  }
-  
-  @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
-    let point = gestureRecognizer.location(in: tableView)
-    let indexPath = tableView.indexPathForRow(at: point)
-    
-    if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
-      return
-    }
-    
-    descriptionTextView.resignFirstResponder()
+    configureGestureRecognizer()
   }
   
   @IBAction func cancel() {
@@ -141,6 +87,69 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
       place.photo = UIImagePNGRepresentation(UIImage(named: "noimage")!) as Data?
     }
   }
+  
+  //MARK: - location
+  
+  func findLocation() {
+    addressLabel.text = "searching for location ... "
+    locationManager.requestAlwaysAuthorization()
+    if CLLocationManager.locationServicesEnabled() {
+      locationManager.delegate = self
+      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      locationManager.requestLocation()
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.first {
+      print(location.coordinate)
+      longitude = location.coordinate.longitude
+      latitude = location.coordinate.latitude
+      
+      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        if let placemarks = placemarks, let placemark = placemarks.first {
+          self.addressLabel.text = placemark.compactAddress
+          self.address = placemark.compactAddress!
+        }
+      }
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
+  
+  func getDate(date: NSDate) -> String {
+    let dateformatter = DateFormatter()
+    dateformatter.dateStyle = DateFormatter.Style.medium
+    return dateformatter.string(from: date as Date)
+  }
+  
+  // MARK: - textView
+  
+  func textViewDidChange(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      doneButton.isEnabled = false
+    } else {
+      doneButton.isEnabled = true
+    }
+  }
+  
+  func configureGestureRecognizer() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    gestureRecognizer.cancelsTouchesInView = false
+    tableView.addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+    let point = gestureRecognizer.location(in: tableView)
+    let indexPath = tableView.indexPathForRow(at: point)
+    
+    if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+      return
+    }
+    
+    descriptionTextView.resignFirstResponder()
+  }
+  
   // MARK: - TableView
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,6 +179,8 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     }
   }
 }
+
+// MARK: - UIImagePickerControllerDelegate and UINavigationControllerDelegate
 
 extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func pickPhoto() {
@@ -232,7 +243,6 @@ class MyImagePickerController: UIImagePickerController {
 }
 
 extension CLPlacemark {
-  
   var compactAddress: String? {
     if let name = name {
       var result = name
