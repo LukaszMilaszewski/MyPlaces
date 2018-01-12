@@ -11,11 +11,11 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     super.viewDidLoad()
     realm = try! Realm()
     places = realm.objects(Place.self)
-    let items = ["By description", "By date", "By address"]
+    let items = ["By date", "By description", "By address"]
 
     let titleView = TitleView(navigationController: navigationController!, title: "My places", items: items)
     titleView?.action = { [weak self] index in
-      let keys = ["descript", "date", "address"]
+      let keys = ["date", "descript", "address"]
       self?.places = self?.realm.objects(Place.self).sorted(byKeyPath: keys[index])
       self?.tableView.reloadData()
     }

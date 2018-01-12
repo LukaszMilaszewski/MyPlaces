@@ -28,7 +28,7 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
   var address = ""
   var date = NSDate()
   
-  func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+  func textViewDidChange(_ textView: UITextView) {
     if textView.text.isEmpty {
       doneButton.isEnabled = false
     } else {
