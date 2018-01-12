@@ -15,8 +15,6 @@
 		8E7FDE3F1FF3F24D004880F8 /* MyPlaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE3D1FF3F24D004880F8 /* MyPlaces.xcdatamodeld */; };
 		8E7FDE411FF3F24D004880F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE401FF3F24D004880F8 /* Assets.xcassets */; };
 		8E7FDE441FF3F24D004880F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE421FF3F24D004880F8 /* LaunchScreen.storyboard */; };
-		8E7FDE4F1FF3F24D004880F8 /* MyPlacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE4E1FF3F24D004880F8 /* MyPlacesTests.swift */; };
-		8E7FDE5A1FF3F24D004880F8 /* MyPlacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE591FF3F24D004880F8 /* MyPlacesUITests.swift */; };
 		8E7FDE691FF3FDCA004880F8 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE671FF3FDCA004880F8 /* PlaceCell.swift */; };
 		8E7FDE6A1FF3FDCA004880F8 /* PlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */; };
 		8E7FDE6C1FF40209004880F8 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FDE6B1FF40209004880F8 /* Place.swift */; };
@@ -61,11 +59,7 @@
 		8E7FDE431FF3F24D004880F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E7FDE451FF3F24D004880F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E7FDE4A1FF3F24D004880F8 /* MyPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7FDE4E1FF3F24D004880F8 /* MyPlacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesTests.swift; sourceTree = "<group>"; };
-		8E7FDE501FF3F24D004880F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E7FDE551FF3F24D004880F8 /* MyPlacesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPlacesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7FDE591FF3F24D004880F8 /* MyPlacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesUITests.swift; sourceTree = "<group>"; };
-		8E7FDE5B1FF3F24D004880F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E7FDE671FF3FDCA004880F8 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		8E7FDE681FF3FDCA004880F8 /* PlaceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceCell.xib; sourceTree = "<group>"; };
 		8E7FDE6B1FF40209004880F8 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -119,8 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				8E7FDE351FF3F24D004880F8 /* MyPlaces */,
-				8E7FDE4D1FF3F24D004880F8 /* MyPlacesTests */,
-				8E7FDE581FF3F24D004880F8 /* MyPlacesUITests */,
 				8E7FDE341FF3F24D004880F8 /* Products */,
 				B36194C7CB0368DD3FD0E22E /* Pods */,
 				3CC7CC6779E78707E9918085 /* Frameworks */,
@@ -156,24 +148,6 @@
 				8E85E0E71FF6D09C0025A3B1 /* MapViewController.swift */,
 			);
 			path = MyPlaces;
-			sourceTree = "<group>";
-		};
-		8E7FDE4D1FF3F24D004880F8 /* MyPlacesTests */ = {
-			isa = PBXGroup;
-			children = (
-				8E7FDE4E1FF3F24D004880F8 /* MyPlacesTests.swift */,
-				8E7FDE501FF3F24D004880F8 /* Info.plist */,
-			);
-			path = MyPlacesTests;
-			sourceTree = "<group>";
-		};
-		8E7FDE581FF3F24D004880F8 /* MyPlacesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8E7FDE591FF3F24D004880F8 /* MyPlacesUITests.swift */,
-				8E7FDE5B1FF3F24D004880F8 /* Info.plist */,
-			);
-			path = MyPlacesUITests;
 			sourceTree = "<group>";
 		};
 		8E7FDE6D1FF40907004880F8 /* PlaceCell */ = {
@@ -524,7 +498,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7FDE4F1FF3F24D004880F8 /* MyPlacesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +505,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7FDE5A1FF3F24D004880F8 /* MyPlacesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

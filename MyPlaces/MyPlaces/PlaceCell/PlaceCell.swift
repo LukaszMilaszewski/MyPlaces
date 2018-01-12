@@ -19,8 +19,10 @@ class PlaceCell: UITableViewCell {
   func thumbnail(for place: Place) -> UIImage {
     if place.hasPhoto, let imageData = place.photo {
       let image = UIImage(data: imageData, scale: 1.0)
+      
       return image!
     }
+    
     return UIImage(named: "noimage.png")!
   }
 }

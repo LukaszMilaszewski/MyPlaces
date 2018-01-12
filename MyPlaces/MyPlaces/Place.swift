@@ -12,6 +12,10 @@ class Place: Object {
     return photo != nil
   }
   
+  func hasPosition() -> Bool {
+    return longitude != 0 && latitude != 0 ? true : false
+  }
+  
   func delete(realm: Realm) {
     try! realm.write({ realm.delete(self) })
   }

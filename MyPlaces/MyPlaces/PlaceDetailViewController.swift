@@ -8,11 +8,14 @@ protocol PlaceDetailViewControllerDelegate: class {
   func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place)
 }
 
-class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
+class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegate, UITextViewDelegate {
   
-  @IBOutlet weak var descriptionTextField: UITextField!
+  @IBOutlet weak var descriptionTextView: UITextView!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var addressLabel: UILabel!
+  @IBOutlet weak var photoLabel: UILabel!
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var doneButton: UIBarButtonItem!
   
   weak var delegate: PlaceDetailViewControllerDelegate?
   var placeToEdit: Place?
@@ -23,14 +26,31 @@ class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
   var longitude = 0.0
   var latitude = 0.0
   var address = ""
+  var date = NSDate()
   
-  @IBAction func findLocation() {
+  func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+    if textView.text.isEmpty {
+      doneButton.isEnabled = false
+    } else {
+      doneButton.isEnabled = true
+    }
+  }
+  
+  func findLocation() {
     addressLabel.text = "searching for location ... "
+    locationManager.requestAlwaysAuthorization()
     if CLLocationManager.locationServicesEnabled() {
       locationManager.delegate = self
       locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
       locationManager.requestLocation()
     }
+  }
+  
+  func show(image: UIImage) {
+    imageView.image = image
+    imageView.isHidden = false
+    imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
+    photoLabel.isHidden = true
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -48,28 +68,49 @@ class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
     }
   }
   
-  func locationManager(_ manager: CLLocationManager,
-                       didFailWithError error: Error) {}
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
   
-  @IBAction func addPhoto() {
-    pickPhoto()
+  func getDate(date: NSDate) -> String {
+    let dateformatter = DateFormatter()
+    dateformatter.dateStyle = DateFormatter.Style.medium
+    return dateformatter.string(from: date as Date)
+  }
+  func configureView() {
+    if let place = placeToEdit {
+      title = "Edit Place"
+      descriptionTextView.text = place.descript
+      addressLabel.text = place.address
+      dateLabel.text = getDate(date: place.date)
+      doneButton.isEnabled = true
+      
+      if let photo = place.photo {
+        show(image: UIImage(data: photo, scale: 1.0)!)
+      }
+    } else {
+      title = "Add Place"
+      dateLabel.text = getDate(date: date)
+    }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    findLocation()
+    configureView()
     
-    locationManager.requestAlwaysAuthorization()
-    addressLabel.text = ""
-    if let place = placeToEdit {
-      title = "Edit Place"
-      descriptionTextField.text = place.descript
-      addressLabel.text = place.address
-      imageView.image = UIImage(data: place.photo!, scale: 1.0)
-    }
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    gestureRecognizer.cancelsTouchesInView = false
+    tableView.addGestureRecognizer(gestureRecognizer)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+    let point = gestureRecognizer.location(in: tableView)
+    let indexPath = tableView.indexPathForRow(at: point)
+    
+    if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+      return
+    }
+    
+    descriptionTextView.resignFirstResponder()
   }
   
   @IBAction func cancel() {
@@ -89,15 +130,43 @@ class PlaceDetailViewController: UIViewController, CLLocationManagerDelegate {
   }
   
   func setupPlace(place: Place) {
-    place.descript = descriptionTextField.text!
+    place.descript = descriptionTextView.text!
     place.longitude = longitude
     place.latitude = latitude
-    place.date = NSDate()
+    place.date = date
     place.address = address
     if let image = imageView.image {
       place.photo = UIImagePNGRepresentation(image) as Data?
     } else {
       place.photo = UIImagePNGRepresentation(UIImage(named: "noimage")!) as Data?
+    }
+  }
+  // MARK: - TableView
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch (indexPath.section, indexPath.row) {
+    case (0, 0):
+      return 88
+    case (1, _):
+      return 84
+    case (2, _):
+      return imageView.isHidden ? 44 : 280
+    default:
+      return 44
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    return (indexPath.section == 0 || indexPath.section == 2) ? indexPath : nil
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.section == 0 && indexPath.row == 0 {
+      descriptionTextView.becomeFirstResponder()
+    }
+    if indexPath.section == 2 && indexPath.row == 0 {
+      pickPhoto()
+      tableView.deselectRow(at: indexPath, animated: true)
     }
   }
 }
@@ -144,8 +213,10 @@ extension PlaceDetailViewController: UIImagePickerControllerDelegate, UINavigati
     let image = info[UIImagePickerControllerEditedImage] as? UIImage
     
     if let theImage = image {
-      imageView.image = theImage
+      show(image: theImage)
     }
+    
+    tableView.reloadData()
     dismiss(animated: true, completion: nil)
   }
   
