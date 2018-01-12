@@ -8,8 +8,6 @@ class PlaceCell: UITableViewCell {
 
   override func awakeFromNib() {
     super.awakeFromNib()
-    photoView.layer.cornerRadius = photoView.bounds.size.width / 2
-    photoView.clipsToBounds = true
   }
   
   func initPlaceCell(place: Place) {

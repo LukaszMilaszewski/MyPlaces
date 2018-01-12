@@ -20,14 +20,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MV8-l0-iMq">
-                        <rect key="frame" x="16" y="5" width="90" height="90"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="90" id="Auw-tg-6IQ"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YA-vg-b3k">
-                        <rect key="frame" x="119" y="48" width="201" height="47"/>
+                        <rect key="frame" x="119" y="48" width="201" height="46"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,19 +32,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MV8-l0-iMq">
+                        <rect key="frame" x="16" y="12" width="75" height="75"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="Auw-tg-6IQ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="NjT-pG-coo" firstAttribute="leading" secondItem="5YA-vg-b3k" secondAttribute="leading" id="3HQ-hr-J1j"/>
                     <constraint firstItem="NjT-pG-coo" firstAttribute="trailing" secondItem="5YA-vg-b3k" secondAttribute="trailing" id="3h3-MK-Lkc"/>
-                    <constraint firstItem="MV8-l0-iMq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-6" id="4yo-C3-Jcc"/>
+                    <constraint firstItem="MV8-l0-iMq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="4yo-C3-Jcc"/>
                     <constraint firstItem="MV8-l0-iMq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Xq-1b-dCN"/>
                     <constraint firstItem="5YA-vg-b3k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="37" id="IY2-Hj-wOL"/>
                     <constraint firstAttribute="bottomMargin" secondItem="NjT-pG-coo" secondAttribute="bottom" constant="39" id="S6Z-JM-gEg"/>
-                    <constraint firstItem="MV8-l0-iMq" firstAttribute="bottom" secondItem="5YA-vg-b3k" secondAttribute="bottom" id="ZW4-dw-kd7"/>
-                    <constraint firstItem="MV8-l0-iMq" firstAttribute="top" secondItem="NjT-pG-coo" secondAttribute="top" id="bEz-U9-lbx"/>
+                    <constraint firstItem="MV8-l0-iMq" firstAttribute="bottom" secondItem="5YA-vg-b3k" secondAttribute="bottom" constant="-7" id="ZW4-dw-kd7"/>
+                    <constraint firstItem="MV8-l0-iMq" firstAttribute="top" secondItem="NjT-pG-coo" secondAttribute="top" constant="7" id="bEz-U9-lbx"/>
                     <constraint firstItem="MV8-l0-iMq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ijc-Qf-gDH"/>
                     <constraint firstAttribute="trailing" secondItem="NjT-pG-coo" secondAttribute="trailing" id="mFE-oC-7QS"/>
-                    <constraint firstItem="NjT-pG-coo" firstAttribute="leading" secondItem="MV8-l0-iMq" secondAttribute="trailing" constant="13" id="sdO-by-cdf"/>
+                    <constraint firstItem="NjT-pG-coo" firstAttribute="leading" secondItem="MV8-l0-iMq" secondAttribute="trailing" constant="28" id="sdO-by-cdf"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
