@@ -29,11 +29,26 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
   var address = ""
   var date = NSDate()
   
-  func show(image: UIImage) {
-    imageView.image = image
-    imageView.isHidden = false
-    imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
-    photoLabel.isHidden = true
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configureView()
+    configureGestureRecognizer()
+  }
+  
+  @IBAction func cancel() {
+    delegate?.placeDetailViewControllerDidCancel(self)
+  }
+  
+  @IBAction func done() {
+    if let place = placeToEdit {
+      let newPlace = Place()
+      setupPlace(place: newPlace)
+      delegate?.placeDetailViewController(self, didFinishEditing: place, editedPlace: newPlace)
+    } else {
+      let place = Place()
+      setupPlace(place: place)
+      delegate?.placeDetailViewController(self, didFinishAdding: place)
+    }
   }
   
   func configureView() {
@@ -62,26 +77,11 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     }
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    configureView()
-    configureGestureRecognizer()
-  }
-  
-  @IBAction func cancel() {
-    delegate?.placeDetailViewControllerDidCancel(self)
-  }
-  
-  @IBAction func done() {
-    if let place = placeToEdit {
-      let newPlace = Place()
-      setupPlace(place: newPlace)
-      delegate?.placeDetailViewController(self, didFinishEditing: place, editedPlace: newPlace)
-    } else {
-      let place = Place()
-      setupPlace(place: place)
-      delegate?.placeDetailViewController(self, didFinishAdding: place)
-    }
+  func show(image: UIImage) {
+    imageView.image = image
+    imageView.isHidden = false
+    imageView.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
+    photoLabel.isHidden = true
   }
   
   func setupPlace(place: Place) {
@@ -90,6 +90,7 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     place.latitude = latitude
     place.date = date
     place.address = address
+   
     if let image = imageView.image {
       place.photo = UIImagePNGRepresentation(image) as Data?
     } else {
@@ -138,16 +139,13 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
   // MARK: - textView
   
   func textViewDidChange(_ textView: UITextView) {
-    if textView.text.isEmpty {
-      doneButton.isEnabled = false
-    } else {
-      doneButton.isEnabled = true
-    }
+    doneButton.isEnabled = textView.text.isEmpty ? false : true
   }
   
   func configureGestureRecognizer() {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
     gestureRecognizer.cancelsTouchesInView = false
+
     tableView.addGestureRecognizer(gestureRecognizer)
   }
   
@@ -170,7 +168,7 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
       return 88
     case (1, _):
       return 84
-    case (2, _):
+    case (2, 0):
       return imageView.isHidden ? 44 : 280
     default:
       return 44

@@ -9,13 +9,17 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    places = realm.objects(Place.self)
+    obtainPlaces()
     setDropdownmenu()
     loadPlaceCell()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     tableView.reloadData()
+  }
+  
+  func obtainPlaces() {
+    places = realm.objects(Place.self)
   }
   
   func loadPlaceCell() {
@@ -79,7 +83,7 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
   }
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    if (editingStyle == .delete){
+    if (editingStyle == .delete) {
       let place = places[indexPath.row]
       place.delete(realm: realm)
       tableView.deleteRows(at:[indexPath], with: .automatic)
@@ -105,8 +109,7 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     dismiss(animated: true, completion: nil)
   }
   
-  func placeDetailViewController(_ controller: PlaceDetailViewController,
-                                 didFinishEditing place: Place, editedPlace: Place) {
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place) {
     place.update(editedPlace: editedPlace, realm: realm)
     tableView.reloadData()
     dismiss(animated: true, completion: nil)

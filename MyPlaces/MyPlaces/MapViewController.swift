@@ -6,25 +6,43 @@ class MapViewController: UIViewController, PlaceDetailViewControllerDelegate {
   
   var realm = try! Realm()
   var places: Results<Place>!
+  
   @IBOutlet fileprivate weak var mapView: GMSMapView!
+  
+  //MARK: - prepare view
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    hideNavBar()
+    obtainPlaces()
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    mapView.clear()
+    setMarkers()
+  }
+  
+  func obtainPlaces() {
     places = realm.objects(Place.self)
-    if !places.isEmpty {
-      for place in places {
-        if place.hasPosition() {
-          let camera = GMSCameraPosition.camera(withLatitude: place.latitude, longitude: place.longitude, zoom: 6.0)
-          mapView.camera = camera
-          let marker = GMSMarker()
-          marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-          marker.userData = place
-          marker.map = mapView
-        }
-      }
+  }
+  
+  func setMarkers() {
+    mapView.clear()
+   
+    guard !places.isEmpty else { return }
+    
+    for place in places where place.hasPosition() {
+      let camera = GMSCameraPosition.camera(withLatitude: place.latitude, longitude: place.longitude, zoom: 6.0)
+      mapView.camera = camera
+      let marker = GMSMarker()
+      marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+      marker.userData = place
+      marker.map = mapView
     }
+  }
+  
+  func hideNavBar() {
+    self.navigationController?.setNavigationBarHidden(true, animated: true)
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,7 +65,7 @@ class MapViewController: UIViewController, PlaceDetailViewControllerDelegate {
     dismiss(animated: true, completion: nil)
   }
   
-  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place) { }
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place) {}
 }
 
 extension MapViewController: GMSMapViewDelegate {
