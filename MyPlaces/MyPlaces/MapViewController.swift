@@ -10,7 +10,7 @@ class MapViewController: UIViewController, PlaceDetailViewControllerDelegate {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
     mapView.clear()
     places = realm.objects(Place.self)
     if !places.isEmpty {
@@ -36,6 +36,8 @@ class MapViewController: UIViewController, PlaceDetailViewControllerDelegate {
     }
   }
   
+  //MARK: - PlaceDetailViewControllerDelegate
+  
   func placeDetailViewControllerDidCancel(_ controller: PlaceDetailViewController) {
     dismiss(animated: true, completion: nil)
   }
@@ -45,12 +47,7 @@ class MapViewController: UIViewController, PlaceDetailViewControllerDelegate {
     dismiss(animated: true, completion: nil)
   }
   
-  func placeDetailViewController(_ controller: PlaceDetailViewController,
-                                 didFinishEditing place: Place, editedPlace: Place) {
-//    place.update(editedPlace: editedPlace, realm: realm)
-//    tableView.reloadData()
-//    dismiss(animated: true, completion: nil)
-  }
+  func placeDetailViewController(_ controller: PlaceDetailViewController, didFinishEditing place: Place, editedPlace: Place) { }
 }
 
 extension MapViewController: GMSMapViewDelegate {
