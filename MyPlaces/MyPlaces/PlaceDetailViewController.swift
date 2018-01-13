@@ -19,6 +19,7 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
   
   weak var delegate: PlaceDetailViewControllerDelegate?
   var placeToEdit: Place?
+  var placeFromMap: Place?
 
   let locationManager = CLLocationManager()
   lazy var geocoder = CLGeocoder()
@@ -49,12 +50,20 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
     } else {
       title = "Add Place"
       dateLabel.text = getDate(date: date)
+      
+      if let place = placeFromMap {
+        longitude = place.longitude
+        latitude = place.latitude
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        setupAdress(location: location)
+      } else {
+        findLocation()
+      }
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    findLocation()
     configureView()
     configureGestureRecognizer()
   }
@@ -105,12 +114,15 @@ class PlaceDetailViewController: UITableViewController, CLLocationManagerDelegat
       print(location.coordinate)
       longitude = location.coordinate.longitude
       latitude = location.coordinate.latitude
-      
-      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-        if let placemarks = placemarks, let placemark = placemarks.first {
-          self.addressLabel.text = placemark.compactAddress
-          self.address = placemark.compactAddress!
-        }
+      setupAdress(location: location)
+    }
+  }
+  
+  func setupAdress(location: CLLocation) {
+    geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+      if let placemarks = placemarks, let placemark = placemarks.first {
+        self.addressLabel.text = placemark.compactAddress
+        self.address = placemark.compactAddress!
       }
     }
   }

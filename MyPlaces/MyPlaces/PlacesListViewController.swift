@@ -14,6 +14,10 @@ class PlacesListViewController: UITableViewController, PlaceDetailViewController
     loadPlaceCell()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    tableView.reloadData()
+  }
+  
   func loadPlaceCell() {
     let nibCellName = UINib(nibName: "PlaceCell", bundle: nil)
     tableView.register(nibCellName, forCellReuseIdentifier: "PlaceCell")
