@@ -245,11 +245,12 @@
         <scene sceneID="cRG-UO-j2k">
             <objects>
                 <tabBarController id="7yZ-HW-F3H" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hyl-2q-9cy">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" itemPositioning="fill" id="hyl-2q-9cy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.79053999352331605" green="0.49858128716197608" blue="0.38391597026206575" alpha="0.13165713028169015" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.70088326425826486" green="0.96648316062176165" blue="0.56856957947235687" alpha="0.13165713028169015" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="ss5-jJ-Svb" kind="relationship" relationship="viewControllers" id="X2C-sX-Kdr"/>
@@ -282,7 +283,9 @@
         <scene sceneID="6Cj-xg-31x">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9rb-39-MeG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="5sc-3O-XXG"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="5sc-3O-XXG">
+                        <color key="badgeColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Tu-8f-z54">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
