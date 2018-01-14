@@ -5,7 +5,7 @@
 
 # The idea
 ----
-MyPlaces is an iOS mobile application which gives you an opportunity to save favourite places based on actual GPS position or simply by taping on map. Additional features:
+MyPlaces is an iOS mobile application which gives you an opportunity to save favourite places based on actual GPS position or simply by tapping on map. Additional features:
 
 *  Sort places by date, time or address
 *  Add photo
